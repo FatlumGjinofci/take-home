@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\CommentsJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 

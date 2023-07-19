@@ -5,12 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CommentRequest;
 use App\Http\Resources\CommentResource;
 use App\Models\Comment;
+use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return CommentResource::collection(Comment::all());
+        $comments = Comment::get();
+
+
+        $res = $comments->paginate(10);
+
+        if ($request->has('limit')) {
+            $res =$comments->paginate($request->limit);
+        }
+
+        return response()->json([
+            'result' => $res,
+            'count' => $comments->count(),
+        ]);
     }
 
     public function store(CommentRequest $request)
