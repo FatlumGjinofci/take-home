@@ -47,7 +47,7 @@ class CommentController extends Controller
             $res = $comments->with('post');
         }
 
-        $res = $comments->paginate($request->limit ?? 10);
+        $res = $comments->paginate($request->limit ?? 10)->withQueryString();
 
         return response()->json([
             'result' => $res,
