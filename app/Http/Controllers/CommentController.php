@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
+use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use App\Services\CommentService;
 use Illuminate\Http\Request;
@@ -23,8 +24,8 @@ class CommentController extends Controller
             : $comments->paginate(10)->withQueryString();
 
         return response()->json([
-            'result' => $res,
-            'count' => $comments->count(),
+            'result' => CommentResource::collection($res)->response()->getData(true),
+            'count' => $res->count(),
         ]);
     }
 

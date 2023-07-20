@@ -42,10 +42,8 @@ class Post extends Model
             })
             ->when($request->filled('comment'), function ($query) use ($request) {
                 return $query->with(['comments' => function ($item) use ($request) {
-                    $item->where('content', 'like', '%'.$request->comment.'%');
-                }])
-                    ->paginate(10)
-                    ->withQueryString();
+                    return $item->where('content', 'like', '%'.$request->comment.'%');
+                }]);
             });
     }
 }
