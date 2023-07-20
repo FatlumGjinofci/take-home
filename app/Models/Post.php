@@ -23,7 +23,7 @@ class Post extends Model
                 return $query->where('id', $request->id);
             })
             ->when($request->filled('topic'), function ($query) use ($request) {
-                return $query->where('topic', $request->post_id);
+                return $query->where('topic', 'like', '%'.$request->topic.'%');
             })
             ->when($request->filled('created_at'), function ($query) use ($request) {
                 return $query->whereDate('created_at', $request->created_at);

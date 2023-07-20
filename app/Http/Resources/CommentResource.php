@@ -17,6 +17,7 @@ class CommentResource extends JsonResource
             'abbreviation' => $this->abbervation,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'post' => $this->whenLoaded('post'),
         ];
     }
 }

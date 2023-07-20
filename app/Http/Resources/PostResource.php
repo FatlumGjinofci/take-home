@@ -15,6 +15,7 @@ class PostResource extends JsonResource
             'topic' => $this->topic,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'comments' => $this->whenLoaded('comments'),
         ];
     }
 }
