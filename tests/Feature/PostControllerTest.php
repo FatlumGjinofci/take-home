@@ -42,7 +42,7 @@ class PostControllerTest extends TestCase
     {
         $post = Post::factory(1)->create()->first();
 
-        $response = $this->delete('/api/posts/' . $post->id);
+        $response = $this->delete('/api/posts/'.$post->id);
 
         $response->assertStatus(200)
             ->assertJson([

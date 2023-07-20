@@ -21,6 +21,10 @@ class CommentsJob implements ShouldQueue
 
     public function handle()
     {
+        if (Comment::count() > 1) {
+            Comment::truncate();
+        }
+
         $dataset = collect(config('data.dataset '));
 
         $dataset->each(function ($item) {
@@ -32,5 +36,6 @@ class CommentsJob implements ShouldQueue
                 'abbreviation' => $abbreviation,
             ]);
         });
+
     }
 }

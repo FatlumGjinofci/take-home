@@ -36,8 +36,8 @@ class CommentController extends Controller
             if (! $comment) {
                 return response()->json([
                     'status' => false,
-                    'message' => 'Abbreviation for comment exists already!',
-                ]);
+                    'message' => 'Comment with this abbreviation already exists',
+                ], 400);
             }
 
             return response()->json([
