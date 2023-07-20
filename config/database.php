@@ -92,6 +92,11 @@ return [
             // 'encrypt' => env('DB_ENCRYPT', 'yes'),
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
+        'testing' => [
+            'driver' => 'sqlite', // You can use 'mysql', 'pgsql', 'sqlsrv', etc., as per your driver
+            'database' => ':memory:', // This tells Laravel to use an in-memory database
+            'prefix' => '',
+        ],
 
     ],
 
