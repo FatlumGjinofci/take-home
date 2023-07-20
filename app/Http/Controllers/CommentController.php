@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CommentHelper;
 use App\Http\Requests\CommentRequest;
 use App\Http\Resources\CommentResource;
 use App\Models\Comment;
+use App\Models\Post;
+use App\Services\CommentService;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    public function __construct(
+        public CommentService $commentService
+    ) { }
     public function index(Request $request)
     {
         $comments = Comment::query();
-
-
-        $res = $comments->paginate(10);
 
         if ($request->has('id')) {
             $res = $comments->where('id', $request->id);
@@ -47,7 +50,11 @@ class CommentController extends Controller
             $res = $comments->with('post');
         }
 
-        $res = $comments->paginate($request->limit ?? 10)->withQueryString();
+        if ($request->has('limit')) {
+            $res = $comments->paginate($request->limit)->withQueryString();
+        }
+
+        $res = $comments->paginate(10)->withQueryString();
 
         return response()->json([
             'result' => $res,
@@ -57,25 +64,39 @@ class CommentController extends Controller
 
     public function store(CommentRequest $request)
     {
-        return new CommentResource(Comment::create($request->validated()));
+        try {
+            $comment = $this->commentService->create($request);
+
+            if (!$comment) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Abbreviation for comment exists already!',
+                ]);
+            }
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Comment created successfully',
+                'comment' => $comment
+            ]);
+
+        }
+        catch (\Exception $exception) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Something went wrong',
+                'error' => $exception->getMessage()
+            ], 400);
+        }
     }
 
-    public function show(Comment $comment)
-    {
-        return new CommentResource($comment);
-    }
-
-    public function update(CommentRequest $request, Comment $comment)
-    {
-        $comment->update($request->validated());
-
-        return new CommentResource($comment);
-    }
-
-    public function destroy(Comment $comment)
+    public function delete(Comment $comment)
     {
         $comment->delete();
 
-        return response()->json();
+        return response()->json([
+            'status' => true,
+            'message' => 'Comment deleted successfully'
+        ]);
     }
 }

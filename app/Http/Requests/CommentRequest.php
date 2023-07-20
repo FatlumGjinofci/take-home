@@ -9,9 +9,7 @@ class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'post_id' => ['required', 'integer'],
             'content' => ['required'],
-            'abbervation' => ['required'],
         ];
     }
 

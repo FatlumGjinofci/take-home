@@ -33,7 +33,7 @@ class CommentsJob implements ShouldQueue
         });
     }
 
-    private function abbreviation($item)
+    public function abbreviation($item)
     {
         $words = explode(' ', $item);
 

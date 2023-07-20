@@ -31,10 +31,12 @@ Route::prefix('posts')->group( function() {
 
 Route::prefix('comments')->group( function () {
     Route::get('/', [\App\Http\Controllers\CommentController::class, 'index']);
-    Route::delete('/{comment}', function () {
-        return response()->json([
-            'status' => false,
-            'message' => 'Comment not found!'
-        ], 404);
+    Route::post('/', [\App\Http\Controllers\CommentController::class, 'store']);
+    Route::delete('/{comment}', [\App\Http\Controllers\CommentController::class, 'delete'])
+        ->missing(function () {
+            return response()->json([
+                'status' => false,
+                'message' => 'Comment not found!'
+            ], 404);
     });
 });
