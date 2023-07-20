@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\CommentHelper;
 use App\Http\Requests\CommentRequest;
-use App\Http\Resources\CommentResource;
 use App\Models\Comment;
-use App\Models\Post;
 use App\Services\CommentService;
 use Illuminate\Http\Request;
 
@@ -14,7 +11,9 @@ class CommentController extends Controller
 {
     public function __construct(
         public CommentService $commentService
-    ) { }
+    ) {
+    }
+
     public function index(Request $request)
     {
         $comments = Comment::query();
@@ -26,12 +25,12 @@ class CommentController extends Controller
             $res = $comments->where('post_id', $request->post_id);
         }
         if ($request->has('content')) {
-            $res = $comments->where('content', 'like', "%".$request->content."%");
+            $res = $comments->where('content', 'like', '%'.$request->content.'%');
         }
         if ($request->has('abbreviation')) {
-            $res = $comments->where('abbreviation', 'like', "%".$request->abbreviation);
+            $res = $comments->where('abbreviation', 'like', '%'.$request->abbreviation);
         }
-        if($request->has('created_at')) {
+        if ($request->has('created_at')) {
             $res = $comments->whereDate('created_at', $request->created_at);
         }
         if ($request->has('updated_at')) {
@@ -67,7 +66,7 @@ class CommentController extends Controller
         try {
             $comment = $this->commentService->create($request);
 
-            if (!$comment) {
+            if (! $comment) {
                 return response()->json([
                     'status' => false,
                     'message' => 'Abbreviation for comment exists already!',
@@ -77,15 +76,14 @@ class CommentController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Comment created successfully',
-                'comment' => $comment
+                'comment' => $comment,
             ]);
 
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             return response()->json([
                 'status' => false,
                 'message' => 'Something went wrong',
-                'error' => $exception->getMessage()
+                'error' => $exception->getMessage(),
             ], 400);
         }
     }
@@ -96,7 +94,7 @@ class CommentController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Comment deleted successfully'
+            'message' => 'Comment deleted successfully',
         ]);
     }
 }

@@ -8,7 +8,6 @@ use App\Models\Post;
 
 class CommentService
 {
-
     public function create($request)
     {
         $abbreviation = CommentHelper::abbreviation($request->content);

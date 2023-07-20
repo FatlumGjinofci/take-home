@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PostRequest;
-use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -23,7 +21,7 @@ class PostController extends Controller
             $res = $posts->where('topic', 'like', '%'.$request->topic.'%');
         }
 
-        if($request->has('created_at')) {
+        if ($request->has('created_at')) {
             $res = $posts->whereDate('created_at', $request->created_at);
         }
 
@@ -52,8 +50,8 @@ class PostController extends Controller
         $res = $posts->paginate($request->limit ?? 10)->withQueryString();
 
         return response()->json([
-           'result' => $res,
-           'count' => $res->count()
+            'result' => $res,
+            'count' => $res->count(),
         ]);
 
     }
@@ -64,7 +62,7 @@ class PostController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Post deleted successfully'
+            'message' => 'Post deleted successfully',
         ]);
     }
 }

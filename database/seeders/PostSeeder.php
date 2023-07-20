@@ -28,7 +28,7 @@ class PostSeeder extends Seeder
             [
                 'topic' => 'Biotechnology and Genetic Engineering',
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
+                'updated_at' => Carbon::now(),
             ],
             [
                 'topic' => 'Cyber-security and Privacy',
@@ -38,7 +38,7 @@ class PostSeeder extends Seeder
             [
                 'topic' => 'Space Exploration',
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
+                'updated_at' => Carbon::now(),
             ],
         ];
 

@@ -14,6 +14,7 @@ class CommentHelper
         foreach ($words as $word) {
             $abbreviation .= Str::lower(Str::substr($word, 0, 1));
         }
+
         return $abbreviation;
     }
 }
