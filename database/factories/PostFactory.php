@@ -13,7 +13,7 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'topic' => $this->faker->word(),
+            'topic' => $this->faker->unique()->word(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];
