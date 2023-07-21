@@ -14,10 +14,10 @@ class CommentResource extends JsonResource
             'id' => $this->id,
             'post_id' => $this->post_id,
             'content' => $this->content,
-            'abbreviation' => $this->abbervation,
+            'abbreviation' => $this->abbreviation,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'post' => $this->whenLoaded('post'),
+            'post' => new PostResource($this->whenLoaded('post')),
         ];
     }
 }
