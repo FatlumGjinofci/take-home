@@ -13,7 +13,7 @@ class LoadDatasetCommand extends Command
 
     public function handle()
     {
-        CommentsJob::dispatch();
+        //CommentsJob::dispatch();
 
         $this->info('Dataset load completed!');
     }

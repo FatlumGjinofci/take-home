@@ -10,12 +10,12 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('post_id');
+            $table->foreignId('post_id')->nullable();
             $table->string('content');
             $table->string('abbreviation')->unique();
             $table->timestamps();
 
-            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->foreign('post_id')->references('id')->on('posts')->nullOnDelete();
         });
     }
 
