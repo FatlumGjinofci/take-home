@@ -35,19 +35,21 @@ class CommentControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'result' => [
-                    'current_page',
+                    'links' => [
+                        'first',
+                        'last',
+                        'prev',
+                        'next',
+                    ],
+                    'meta' => [
+                        'current_page',
+                        'from',
+                        'links',
+                        'path',
+                        'to',
+                        'total',
+                    ],
                     'data' => [],
-                    'first_page_url',
-                    'from',
-                    'last_page',
-                    'last_page_url',
-                    'links',
-                    'next_page_url',
-                    'path',
-                    'per_page',
-                    'prev_page_url',
-                    'to',
-                    'total',
                 ],
                 'count',
             ]);
@@ -63,19 +65,21 @@ class CommentControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'result' => [
-                    'current_page',
+                    'links' => [
+                        'first',
+                        'last',
+                        'prev',
+                        'next',
+                    ],
+                    'meta' => [
+                        'current_page',
+                        'from',
+                        'links',
+                        'path',
+                        'to',
+                        'total',
+                    ],
                     'data' => [],
-                    'first_page_url',
-                    'from',
-                    'last_page',
-                    'last_page_url',
-                    'links',
-                    'next_page_url',
-                    'path',
-                    'per_page',
-                    'prev_page_url',
-                    'to',
-                    'total',
                 ],
                 'count',
             ]);
