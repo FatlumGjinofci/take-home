@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PostResource;
+use App\Data\PostData;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -13,11 +13,11 @@ class PostController extends Controller
         $posts = Post::filter($request);
 
         $res = $request->filled('limit')
-            ? $posts->paginate($request->limit)->withQueryString()
-            : $posts->paginate(10)->withQueryString();
+            ? $posts->fastPaginate($request->limit)->withQueryString()
+            : $posts->fastPaginate(10)->withQueryString();
 
         return response()->json([
-            'result' => PostResource::collection($res)->response()->getData(true),
+            'result' => PostData::collection($res),
             'count' => $res->count(),
         ]);
 

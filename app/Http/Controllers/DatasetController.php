@@ -17,7 +17,7 @@ class DatasetController extends Controller
         return $result;
     }
 
-    public function generateCombinations($words, $length, $start = 0, $combination = [])
+    private function generateCombinations($words, $length, $start = 0, $combination = [])
     {
         $combinations = [];
 
@@ -38,7 +38,7 @@ class DatasetController extends Controller
         return $combinations;
     }
 
-    public function getAllCombinations($randomWords)
+    private function getAllCombinations($randomWords)
     {
         $words = explode(',', strtolower($randomWords));
         $combinations = [];
