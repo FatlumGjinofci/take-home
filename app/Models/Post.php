@@ -59,7 +59,7 @@ class Post extends Model
     protected function updatedAt(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => Carbon::parse($value)->toDateString(),
+            get: fn (string $value) => Carbon::parse($value)->toDateString(),
         );
     }
 }

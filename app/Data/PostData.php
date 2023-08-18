@@ -13,5 +13,4 @@ class PostData extends Data
         public string $updated_at
     ) {
     }
-
 }
